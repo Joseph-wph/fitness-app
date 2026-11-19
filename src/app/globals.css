@@ -1,0 +1,105 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+/* ------------------------------------------------------------------
+ * DESIGN TOKENS — single source of truth
+ * 1) Raw values live in :root (edit hex colors here only).
+ * 2) @theme inline maps them to Tailwind utilities
+ *    (bg-primary, text-secondary, font-heading, ...).
+ * Breakpoints use Tailwind defaults: md = 768px (tablet), lg = 1024px (desktop).
+ * ------------------------------------------------------------------ */
+:root {
+  /* Brand colors */
+  --primary: #808cfd;
+  --secondary: #e9ecff;
+  --ink: #000000;
+
+  --background: #ffffff;
+  --foreground: var(--ink);
+  --primary-foreground: var(--ink);
+  --secondary-foreground: var(--ink);
+  --muted: var(--secondary);
+  --muted-foreground: #404040;
+  --border: #404040;
+  --ring: var(--primary);
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  /* Brand colors */
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  /* Fonts (CSS variables are created in src/config/fonts.ts) */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-anek-tamil);
+
+  /* Radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+}
+
+@layer base {
+  /* Tailwind v4 defaults borders to currentColor; restore our border token */
+  *,
+  ::after,
+  ::before {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+}
+
+/* ------------------------------------------------------------------
+ * Reusable typographic utilities (edit sizes here, not in components)
+ * Sizes follow the Figma frames:
+ *   mobile 375px (base) · tablet 800px (md) · desktop 1280px (lg)
+ * ------------------------------------------------------------------ */
+@utility text-display {
+  @apply font-heading text-[37px] font-extrabold uppercase leading-[0.9] tracking-tighter md:text-[71px] lg:text-[116px];
+}
+
+@utility text-section-title {
+  @apply font-heading text-[37px] font-extrabold uppercase leading-[0.9] tracking-tighter md:text-[71px] lg:text-[116px];
+}
+
+@utility text-card-title {
+  @apply font-heading text-[1.875rem] font-extrabold uppercase leading-none tracking-tight md:text-[2rem] lg:text-[2.25rem];
+}
+
+@utility text-info-title {
+  @apply font-heading text-[1.5rem] font-extrabold uppercase leading-none tracking-tight md:text-[2rem] lg:text-[2.25rem];
+}
+
+@utility text-item-title {
+  @apply font-heading text-lg font-extrabold uppercase leading-tight md:text-xl;
+}
+
+@utility text-body {
+  @apply font-sans text-sm leading-snug md:text-[0.9375rem];
+}
+
+@utility text-lead {
+  @apply font-sans text-base leading-snug lg:text-lg;
+}
+
+@utility text-label {
+  @apply font-mono text-xs uppercase tracking-wide md:text-sm;
+}
